@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Head from 'next/head'
 import { Row, Col, List, Icon } from "antd";
 import Header from '../components/header'
+import Author from "../components/author";
 import '../static/style/pages/index.css'
 const Home = () => {
 
@@ -46,7 +47,7 @@ const Home = () => {
         />
       </Col>
       <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
-        右侧
+        <Author />
       </Col>
     </Row>
 

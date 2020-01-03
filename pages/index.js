@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
 import { Row, Col, List, Icon } from "antd";
+
 import Header from '../components/header'
+import Footer from '../components/footer'
 import Author from "../components/author";
+
 import '../static/style/pages/index.css'
+
 const Home = () => {
 
   const [ mylist, setMylist ] = useState(
@@ -51,6 +55,7 @@ const Home = () => {
       </Col>
     </Row>
 
+    <Footer />
   </div>
   )
 }

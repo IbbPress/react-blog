@@ -12,7 +12,7 @@ const Author = () => {
         <Avatar size={28} icon="qq"  className="account" />
         <Avatar size={28} icon="wechat"  className="account" />
       </div>
-  </div>
+    </div>
   )
 }
 

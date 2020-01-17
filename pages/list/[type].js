@@ -3,12 +3,12 @@ import React,{useState} from 'react'
 import Head from 'next/head'
 import {Row, Col , List ,Icon ,Breadcrumb  } from 'antd'
 import dayjs from 'dayjs'
-import Header from '../components/Header'
-import Author from '../components/Author'
-import Footer from '../components/Footer'
-import '../static/style/pages/list.css'
+import Header from '../../components/Header'
+import Author from '../../components/Author'
+import Footer from '../../components/Footer'
+import '../../static/style/pages/list.css'
 
-import { getPostList } from '../utils/api.js'
+import { getPostList } from '../../utils/api.js'
 
 const Home = (props) =>{
   const [ mylist , setMylist ] = useState(props.data);
@@ -61,9 +61,10 @@ const Home = (props) =>{
 
 }
 
-Home.getInitialProps = async () => {
+Home.getInitialProps = async (context) => {
+  const { type } = context.query
   const promise = new Promise((resolve, reject) => {
-    getPostList().then(resp => resolve(resp))
+    getPostList({type: type}).then(resp => resolve(resp))
   })
   return await promise;
 }

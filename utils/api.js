@@ -1,4 +1,11 @@
 import { GET, POST } from './request.js';
 
-export const getPost = id => GET('/default/getArticle/' + id)
-export const getPostList = () => GET('/default/getArticleList')
+// 文章列表
+export const getPostList = (payload) => GET('/getArticleList/', payload)
+
+// 文章详情
+export const getPost     = id => GET('/getArticle/' + id)
+
+// 文章类型
+export const getTypeInfo = () => GET('/getTypeInfo')
+

@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 创建 axios 实例
 const service = axios.create({
-  baseURL: "http://127.0.0.1:7002",
+  baseURL: "http://127.0.0.1:7002/default",
   // timeout: 20000 // 请求超时时间
 });
 
@@ -13,7 +13,7 @@ const errHandle = error => {
 
 // request 拦截器
 service.interceptors.request.use(config => {
-  console.log('config: ', config);
+  // console.log('config: ', config);
   return config;
 }, errHandle);
 

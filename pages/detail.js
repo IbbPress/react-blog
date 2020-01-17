@@ -1,7 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import Head from 'next/head'
 import { Row, Col, Icon ,Breadcrumb, Affix } from 'antd'
-import axios from 'axios'
 import dayjs from 'dayjs'
 
 import marked from 'marked'
@@ -13,6 +12,8 @@ import Header from '../components/Header'
 import Author from '../components/Author'
 import Footer from '../components/Footer'
 import '../static/style/pages/detail.css'
+
+import { getPost } from '../utils/api.js'
 
 const Detail = (props) =>{
 
@@ -65,7 +66,9 @@ const Detail = (props) =>{
                 <div className="bread-div">
                   <Breadcrumb>
                     <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
-                    <Breadcrumb.Item>视频列表</Breadcrumb.Item>
+                    <Breadcrumb.Item>
+                      <a href="/list">列表</a>
+                    </Breadcrumb.Item>
                     <Breadcrumb.Item>{post.title}</Breadcrumb.Item>
                   </Breadcrumb>
                 </div>
@@ -106,11 +109,7 @@ Detail.getInitialProps = async (context) => {
   const { id } = context.query;
 
   const promise = new Promise((resolve, reject) => {
-    const baseUrl = 'http://127.0.0.1:7002';
-    let url = '/default/getArticle/'
-    axios(baseUrl + url + id).then(resp => {
-      resolve(resp.data)
-    })
+    getPost(id).then(resp => resolve(resp))
   })
   return await promise;
 }

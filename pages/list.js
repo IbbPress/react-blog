@@ -9,6 +9,8 @@ import Author from '../components/Author'
 import Footer from '../components/Footer'
 import '../static/style/pages/list.css'
 
+import { getPostList } from '../utils/api.js'
+
 const Home = (props) =>{
   console.log('props: ', props);
   const [ mylist , setMylist ] = useState(
@@ -37,7 +39,9 @@ const Home = (props) =>{
                 dataSource={mylist}
                 renderItem={item => (
                   <List.Item>
-                    <div className="list-title">{item.title}</div>
+                    <div className="list-title">
+                      <a href={`/detail?id=${item.id}`}>{item.title}</a>
+                    </div>
                     <div className="list-icon">
                       <span><Icon type="calendar" />{ dayjs.unix(item.add_time).format('YYYY-MM-DD') }</span>
                       <span><Icon type="folder" /> 视频教程</span>
@@ -60,17 +64,11 @@ const Home = (props) =>{
    </>
   )
 
-} 
-// Home.getInitialProps = () => {
-//   console.log('home.Home.getInitialProps');
-// }
+}
+
 Home.getInitialProps = async () => {
   const promise = new Promise((resolve, reject) => {
-    const baseUrl = 'http://127.0.0.1:7002';
-    let url = '/default/getArticleList'
-    axios(baseUrl + url).then(resp => {
-      resolve(resp.data)
-    })
+    getPostList().then(resp => resolve(resp))
   })
   return await promise;
 }

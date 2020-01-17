@@ -1,14 +1,14 @@
 
 import React,{useState} from 'react'
 import Head from 'next/head'
-import {Row, Col , List ,Icon ,Breadcrumb  } from 'antd'
-import dayjs from 'dayjs'
+import { Row, Col , List ,Icon ,Breadcrumb  } from 'antd'
 import Header from '../../components/Header'
 import Author from '../../components/Author'
 import Footer from '../../components/Footer'
 import '../../static/style/pages/list.css'
 
 import { getPostList } from '../../utils/api.js'
+import PostItem from '../../components/Item.js'
 
 const Home = (props) =>{
   const [ mylist , setMylist ] = useState(props.data);
@@ -34,15 +34,7 @@ const Home = (props) =>{
                 dataSource={mylist}
                 renderItem={item => (
                   <List.Item>
-                    <div className="list-title">
-                      <a href={`/detail?id=${item.id}`}>{item.title}</a>
-                    </div>
-                    <div className="list-icon">
-                      <span><Icon type="calendar" />{ dayjs.unix(item.add_time).format('YYYY-MM-DD') }</span>
-                      <span><Icon type="folder" /> 视频教程</span>
-                      <span><Icon type="fire" /> {item.view_count}人</span>
-                    </div>
-                    <div className="list-content">{item.content}</div>  
+                    <PostItem item={item} />
                   </List.Item>
                 )}
               />  
@@ -55,10 +47,8 @@ const Home = (props) =>{
         </Col>
       </Row>
       <Footer/>
-
    </>
   )
-
 }
 
 Home.getInitialProps = async (context) => {
